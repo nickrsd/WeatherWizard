@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_wizard/features/weather/data/models/weather_now.dart';
 import 'package:weather_wizard/features/weather/domain/entities/weather_condition.dart';
-import 'package:weather_wizard/features/weather/domain/entities/weather_now.dart';
 
 void main() {
   group('Testing fromJson', () {

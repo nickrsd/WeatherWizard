@@ -1,22 +1,22 @@
 import 'package:equatable/equatable.dart';
 
-import 'weather_forecast.dart';
-import 'weather_now.dart';
+import 'package:weather_wizard/features/weather/domain/entities/weather_forecast.dart';
+import 'package:weather_wizard/features/weather/domain/entities/weather_now.dart';
 
 class WeatherEntity extends Equatable {
   final WeatherNowEntity? weatherNow;
-  final List<DailyForecastEntity> dailyWeatherData;
-  final List<HourlyForecastEntity> hourlyWeatherData;
+  final List<DailyForecastEntity> dailyForecast;
+  final List<HourlyForecastEntity> hourlyForecast;
 
   const WeatherEntity(
       {this.weatherNow,
-      this.dailyWeatherData = const [],
-      this.hourlyWeatherData = const []});
+      this.dailyForecast = const [],
+      this.hourlyForecast = const []});
 
   @override
   List<Object?> get props => [
         weatherNow,
-        dailyWeatherData,
-        hourlyWeatherData,
+        dailyForecast,
+        hourlyForecast,
       ];
 }

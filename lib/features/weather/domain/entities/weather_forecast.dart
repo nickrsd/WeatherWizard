@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'weather_condition.dart';
+import 'package:weather_wizard/features/weather/domain/entities/weather_condition.dart';
 
 /// Weather for a single day from a 1-16 day forecast.
 ///

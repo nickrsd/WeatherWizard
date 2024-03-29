@@ -32,3 +32,7 @@ It does mean a lot of folders and some levels of redundancy, but opting into tha
 I did all my planning up front, alongside quick PoC passes on anything I can answer early. Once I start building, I like starting with domain layers, because it forces me into defining my contracts early for business logic. If you start on it later, it can be too easy sometimes to just grab what you need "this time" to be quick, and before you know it you lose that separation of concerns.
 
 I want to avoid that. I know I'll need representations of weather data, and at the very least bloc states for initial/loading/update states, and an event to request such data, so I'll start there.
+
+# Weather
+
+After starting with the domain and validating JSON, will be time to bring in the repositories. The ability to stub those out (and your blocs) is where a lot of power is in terms of testability and achieving separation of concerns.

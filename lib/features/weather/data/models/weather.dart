@@ -6,8 +6,8 @@ import 'package:weather_wizard/features/weather/domain/entities/weather.dart';
 class WeatherModel extends WeatherEntity {
   const WeatherModel(
       {super.weatherNow,
-      super.dailyWeatherData = const [],
-      super.hourlyWeatherData = const []});
+      super.dailyForecast = const [],
+      super.hourlyForecast = const []});
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
     final {
@@ -48,8 +48,8 @@ class WeatherModel extends WeatherEntity {
 
     return WeatherModel(
       weatherNow: WeatherNow.fromJson(currentWeatherJson),
-      dailyWeatherData: dailyForecastData.toList(),
-      hourlyWeatherData: hourlyForecastData.toList(),
+      dailyForecast: dailyForecastData.toList(),
+      hourlyForecast: hourlyForecastData.toList(),
     );
   }
 }

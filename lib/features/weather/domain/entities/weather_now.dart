@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'weather_condition.dart';
+import 'package:weather_wizard/features/weather/domain/entities/weather_condition.dart';
 
 /// The current weather data from most recent 15min aggregate.
 ///
