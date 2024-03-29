@@ -1,7 +1,32 @@
+import 'dart:convert';
+
 import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart' as http;
+import 'package:weather_wizard/config/constants.dart';
+import 'package:weather_wizard/core/common/geolocation.dart';
 import 'package:weather_wizard/features/location/domain/repository/location_repository.dart';
 
+/// Exception thrown when weather for provided location is not found.
+class LocationNotFoundFailure implements Exception {}
+
 class LocationRepositoryImpl implements LocationRepository {
+  @override
+  Future<Geolocation> findSomePlace({required String name}) async {
+    final searchRequest =
+        Uri.https(baseUrlWeather, 'v1/search', {'name': name, 'count': '1'});
+
+    final hopefullySomePlaceData = await http.get(searchRequest);
+
+    if (hopefullySomePlaceData.statusCode != 200) {
+      throw LocationNotFoundFailure();
+    }
+
+    final geoJson =
+        jsonDecode(hopefullySomePlaceData.body) as Map<String, dynamic>;
+
+    return Geolocation.fromJson(geoJson);
+  }
+
   /// Determine the current position of the device.
   ///
   /// When the location services are not enabled or permissions

@@ -13,24 +13,9 @@ class WeatherRequestFailure implements Exception {}
 /// Exception thrown when weather for provided location is not found.
 class WeatherNotFoundFailure implements Exception {}
 
+class LocationNotFoundFailure implements Exception {}
+
 class WeatherRepositoryImpl implements WeatherRepository {
-  @override
-  Future<Geolocation> findSomePlace({required String name}) async {
-    final searchRequest =
-        Uri.https(baseUrlWeather, 'v1/search', {'name': name, 'count': '1'});
-
-    final hopefullySomePlaceData = await http.get(searchRequest);
-
-    if (hopefullySomePlaceData.statusCode != 200) {
-      throw WeatherRequestFailure();
-    }
-
-    final geoJson =
-        jsonDecode(hopefullySomePlaceData.body) as Map<String, dynamic>;
-
-    return Geolocation.fromJson(geoJson);
-  }
-
   @override
   Future<WeatherEntity> getWeather({
     required double latitude,
