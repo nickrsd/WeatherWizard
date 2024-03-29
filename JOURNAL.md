@@ -26,3 +26,9 @@ Already know I'll be using bloc. Plenty of good options out there, but personall
 > The project structure will address separation of concerns >through application of clean architecture in a bloc setup.
 
 It does mean a lot of folders and some levels of redundancy, but opting into that decision is an investment in the future, and early choices in architecture key choices in setting yourself up to fix your past later. It gets us a highly scalable, maintainable, testable pattern that has clear patterns and value we can immediately start capturing once we start mocking things.
+
+## Early Planning
+
+I did all my planning up front, alongside quick PoC passes on anything I can answer early. Once I start building, I like starting with domain layers, because it forces me into defining my contracts early for business logic. If you start on it later, it can be too easy sometimes to just grab what you need "this time" to be quick, and before you know it you lose that separation of concerns.
+
+I want to avoid that. I know I'll need representations of weather data, and at the very least bloc states for initial/loading/update states, and an event to request such data, so I'll start there.
