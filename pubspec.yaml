@@ -46,6 +46,7 @@ dependencies:
   animated_background: ^2.0.0
   mockito: ^5.4.4
   shared_preferences: ^2.2.2
+  flutter_gemini: ^2.0.3
 
 dev_dependencies:
   flutter_test:

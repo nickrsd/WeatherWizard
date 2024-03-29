@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:weather_wizard/features/wizard/presentation/wizard_prison.dart';
 
 class WeatherDashboard extends StatelessWidget {
   const WeatherDashboard({super.key});
@@ -30,35 +31,8 @@ class WeatherDashboard extends StatelessWidget {
         ]
             // const SizedBox(height: 80),
             ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Stack(
-              clipBehavior: Clip.antiAlias,
-              children: [
-                SizedBox(
-                  height: 120,
-                  child: ClipRect(
-                    clipBehavior: Clip.antiAlias,
-                    child: Image.asset("assets/images/stone_wall_light.png",
-                        fit: BoxFit.fill),
-                  ),
-                ),
-                Image.asset("assets/images/prison_room.jpg",
-                    fit: BoxFit.fitHeight),
-                Positioned(
-                  top: 55,
-                  left: 125,
-                  child: SizedBox(
-                    height: 120,
-                    child: Image.asset("assets/images/oldman-all.gif",
-                        fit: BoxFit.fitHeight),
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
+        // const WeatherForecast(),
+        const WizardPrison(),
         const SizedBox(height: 20),
       ],
     ));

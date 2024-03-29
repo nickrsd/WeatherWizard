@@ -4,13 +4,6 @@ import 'package:weather_wizard/features/weather/domain/repository/weather_reposi
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_event.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_state.dart';
 
-/// across what period does this weather report data for, just right now (currentWeather), across multiple days, or an hourly forecast.
-enum WeatherForecastPeriod {
-  currentWeather,
-  dailyForecast,
-  hourlyForecast,
-}
-
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final WeatherRepository _weatherRepository;
 

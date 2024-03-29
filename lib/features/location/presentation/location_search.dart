@@ -11,6 +11,8 @@ import 'package:weather_wizard/features/weather/domain/entities/weather.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_bloc.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_event.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_state.dart';
+import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_bloc.dart';
+import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_state.dart';
 
 class GeolocationSearch extends StatefulWidget {
   const GeolocationSearch({super.key});
@@ -65,7 +67,7 @@ class _GeolocationSearchState extends State<GeolocationSearch> {
   Widget _buildLocationText(LocationState state) {
     return switch (state) {
       LocationUpdated(message: final msg) =>
-        BlocBuilder<WeatherBloc, WeatherState>(
+        BlocBuilder<WizardBloc, WizardState>(
           buildWhen: (previous, current) =>
               current is WeatherUpdated && previous != current,
           builder: (context, state) {
@@ -103,9 +105,9 @@ class _GeolocationSearchState extends State<GeolocationSearch> {
         children: [
           BlocBuilder<LocationBloc, LocationState>(
             builder: (context, state) {
-              final preferences =
-                  context.read<PreferencesBloc>() as UpdatedPreferences;
               if (state case LocationUpdated(:final location, message: _)) {
+                final preferences =
+                    context.read<PreferencesBloc>() as UpdatedPreferences;
                 context.read<WeatherBloc>().add(WeatherRequested(
                     location: location,
                     dailyForecast: preferences.dailyForecast,
