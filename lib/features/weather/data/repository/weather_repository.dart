@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:weather_wizard/config/constants.dart';
 import 'package:http/http.dart' as http;
-import 'package:weather_wizard/core/common/geolocation.dart';
 import 'package:weather_wizard/features/weather/data/models/weather.dart';
 import 'package:weather_wizard/features/weather/domain/entities/weather.dart';
 import 'package:weather_wizard/features/weather/domain/repository/weather_repository.dart';

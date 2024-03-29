@@ -6,10 +6,10 @@ import 'package:weather_wizard/features/location/domain/repository/location_repo
 import 'package:weather_wizard/features/location/presentation/bloc/location_event.dart';
 import 'package:weather_wizard/features/location/presentation/bloc/location_state.dart';
 
-class GeolocationBloc extends Bloc<LocationEvent, LocationState> {
+class LocationBloc extends Bloc<LocationEvent, LocationState> {
   final LocationRepository _locationRepository;
 
-  GeolocationBloc(this._locationRepository) : super(LocationInitial()) {
+  LocationBloc(this._locationRepository) : super(LocationInitial()) {
     on<SearchedLocation>(onSearchedLocation);
   }
 

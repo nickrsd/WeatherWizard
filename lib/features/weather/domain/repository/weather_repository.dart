@@ -1,4 +1,3 @@
-import 'package:weather_wizard/core/common/geolocation.dart';
 import 'package:weather_wizard/features/weather/domain/entities/weather.dart';
 
 abstract interface class WeatherRepository {

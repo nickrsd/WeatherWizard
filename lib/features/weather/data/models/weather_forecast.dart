@@ -1,5 +1,6 @@
 import 'package:weather_wizard/features/weather/data/models/weather_condition.dart';
 import 'package:weather_wizard/features/weather/domain/entities/weather_forecast.dart';
+import 'package:weather_wizard/features/weather/domain/entities/weather_forecast_period.dart';
 
 class DailyForecast extends DailyForecastEntity {
   // expected hightemp, lowtemp, conditions (sunny/rainy), icon for each day
@@ -57,5 +58,65 @@ class HourlyForecast extends HourlyForecastEntity {
         temperature: temp,
         condition: WeatherConditionExtension.fromCode(weatherCode),
         time: timestamp);
+  }
+}
+
+/// creates the daily period to and from ints, defaults to 14.
+extension DailyForecastPeriodValues on DailyForecastPeriod {
+  static DailyForecastPeriod fromCode(int code) {
+    switch (code) {
+      case 1:
+        return DailyForecastPeriod.one;
+      case 3:
+        return DailyForecastPeriod.three;
+      case 7:
+        return DailyForecastPeriod.seven;
+      case 14:
+        return DailyForecastPeriod.fourteen;
+      case 16:
+        return DailyForecastPeriod.sixteen;
+      default:
+        return DailyForecastPeriod.fourteen;
+    }
+  }
+
+  int toInt() {
+    return switch (this) {
+      DailyForecastPeriod.one => 1,
+      DailyForecastPeriod.three => 3,
+      DailyForecastPeriod.seven => 7,
+      DailyForecastPeriod.fourteen => 14,
+      DailyForecastPeriod.sixteen => 16,
+    };
+  }
+}
+
+/// creates the daily period to and from ints, defaults to 12.
+extension HourlyForecastPeriodValues on HourlyForecastPeriod {
+  static HourlyForecastPeriod fromCode(int code) {
+    switch (code) {
+      case 6:
+        return HourlyForecastPeriod.six;
+      case 9:
+        return HourlyForecastPeriod.nine;
+      case 12:
+        return HourlyForecastPeriod.twelve;
+      case 24:
+        return HourlyForecastPeriod.twentyfour;
+      case 48:
+        return HourlyForecastPeriod.fourtyeight;
+      default:
+        return HourlyForecastPeriod.twelve;
+    }
+  }
+
+  int toInt() {
+    return switch (this) {
+      HourlyForecastPeriod.six => 1,
+      HourlyForecastPeriod.nine => 3,
+      HourlyForecastPeriod.twelve => 7,
+      HourlyForecastPeriod.twentyfour => 14,
+      HourlyForecastPeriod.fourtyeight => 16,
+    };
   }
 }

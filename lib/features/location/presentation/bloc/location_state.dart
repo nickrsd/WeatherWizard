@@ -1,8 +1,10 @@
 import 'package:weather_wizard/core/common/geolocation.dart';
 
-class LocationState {}
+sealed class LocationState {}
 
 class LocationInitial extends LocationState {}
+
+class LocationLoading extends LocationState {}
 
 class LocationUnknown extends LocationState {
   final String message;
