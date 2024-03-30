@@ -44,7 +44,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
         'precipitation_probability_max'
       ],
       'forecast_hours': '24',
-      'forecast_days': '4'
+      'forecast_days': '10'
     });
 
     final weatherResponse = await http.get(weatherRequest);

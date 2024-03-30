@@ -46,6 +46,7 @@ dependencies:
   animated_background: ^2.0.0
   mockito: ^5.4.4
   shared_preferences: ^2.2.2
+  flutter_gemini: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,14 @@ flutter:
   assets:
     - assets/images/
     - assets/images/oldman-all.gif
+    - assets/images/pixel_status_bright_sun.png
+    - assets/images/pixel_status_rain.png
+    - assets/images/pixel_status_cloudy.png
+    - assets/images/pixel_status_thunder.png
+    - assets/images/pixel_status_windy.png
+    - assets/images/pixel_status_snow.png
+    - assets/images/pixel_card.png
+    - assets/images/pixel_card_white.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -84,17 +93,37 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+fonts:
+  - family: slkscr
+    fonts:
+      - asset: fonts/slkscr/slkscr.ttf
+      - asset: fonts/slkscr/slkscrb.ttf
+        weight: 700
+      - asset: fonts/slkscr/slkscre.ttf
+        style: italic
+      - asset: fonts/slkscr/slkscreb.ttf
+        style: italic
+        weight: 700
+  - family: pixelfysans
+    fonts:
+      - asset: fonts/pixelfysans/PixelifySans-Regular.ttf
+        weight: 400
+      - asset: fonts/pixelfysans/PixelifySans-Medium.ttf
+        weight: 500
+      - asset: fonts/pixelfysans/PixelifySans-SemiBold.ttf
+        weight: 600
+      - asset: fonts/pixelfysans/PixelifySans-Bold.ttf
+        weight: 700
+  - family: crang
+    fonts:
+      - asset: fonts/crang/crang.ttf
+  - family: dpcomic
+    fonts:
+      - asset: fonts/dpcomic/dpcomic.ttf
+  - family: ponde
+    fonts:
+      - asset: fonts/ponde/ponde.ttf
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

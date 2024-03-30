@@ -40,4 +40,48 @@ extension WeatherConditionExtension on WeatherCondition {
         return WeatherCondition.unknown;
     }
   }
+
+  static String imagePath(WeatherCondition condition) {
+    switch (condition) {
+      case WeatherCondition.clearSky:
+        return "pixel_status_sunny.png";
+      case WeatherCondition.mainlyClear:
+        return "pixel_status_sunny.png";
+      case WeatherCondition.partlyCloudy:
+      case WeatherCondition.overcast:
+      case WeatherCondition.fog:
+        return "pixel_status_cloudy.png";
+
+      case WeatherCondition.lightDrizzle:
+      case WeatherCondition.moderateDrizzle:
+        return "pixel_status_windy.png";
+      case WeatherCondition.denseDrizzle:
+      case WeatherCondition.lightFreezingDrizzle:
+      case WeatherCondition.denseFreezingDrizzle:
+      case WeatherCondition.lightRain:
+      case WeatherCondition.moderateRain:
+      case WeatherCondition.heavyRain:
+      case WeatherCondition.lightFreezingRain:
+      case WeatherCondition.heavyFreezingRain:
+      case WeatherCondition.slightRainShowers:
+        return "pixel_status_rain.png";
+
+      case WeatherCondition.lightSnowfall:
+      case WeatherCondition.moderateSnowfall:
+      case WeatherCondition.heavySnowfall:
+      case WeatherCondition.snowGrains:
+      case WeatherCondition.slightSnowShowers:
+      case WeatherCondition.heavySnowShowers:
+        return "pixel_status_snow.png";
+
+      case WeatherCondition.moderateRainShowers:
+      case WeatherCondition.violentRainShowers:
+      case WeatherCondition.slightThunderstorm:
+      case WeatherCondition.moderateThunderstorm:
+      case WeatherCondition.thunderstormWithLightHail:
+      case WeatherCondition.thunderstormWithHeavyHail:
+      case WeatherCondition.unknown:
+        return "pixel_status_thunder.png";
+    }
+  }
 }

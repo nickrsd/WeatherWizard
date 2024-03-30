@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weather_wizard/features/weather/presentation/weather_dashboard.dart';
+import 'package:weather_wizard/features/weather/presentation/widgets/weather_dashboard.dart';
 
 void main() {
   testWidgets('MyWidget has a title and message', (tester) async {

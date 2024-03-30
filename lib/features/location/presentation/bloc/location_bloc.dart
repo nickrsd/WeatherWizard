@@ -11,6 +11,19 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
 
   LocationBloc(this._locationRepository) : super(LocationInitial()) {
     on<SearchedLocation>(onSearchedLocation);
+    on<RequestedLocation>(onRequestedLocation);
+  }
+
+  void onRequestedLocation(
+      RequestedLocation event, Emitter<LocationState> emit) async {
+    final location = await _locationRepository.determinePosition();
+    emit(LocationUpdated(
+        message: "location updated",
+        placeDescription: "N/A",
+        location: Geolocation(
+            latitude: location.latitude,
+            longitude: location.longitude,
+            name: "${location.timestamp}")));
   }
 
   void onSearchedLocation(
