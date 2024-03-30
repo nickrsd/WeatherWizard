@@ -66,7 +66,7 @@ build/
 ### https://raw.github.com/github/gitignore//Android.gitignore
 
 # Built application files
-*.apk
+
 *.ap_
 
 # Files for the ART/Dalvik VM
