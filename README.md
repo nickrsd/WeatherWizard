@@ -4,6 +4,9 @@ What's an evil wizard to do when trapped in an app and forced to divine weather 
 
 # Getting Started
 
+to build the project just a standard
+`flutter pub get`
+
 To run the project
 `flutter run`
 
