@@ -7,3 +7,5 @@ class SearchedLocation extends LocationEvent {
 
   SearchedLocation({required this.place});
 }
+
+class RequestedLocation extends LocationEvent {}

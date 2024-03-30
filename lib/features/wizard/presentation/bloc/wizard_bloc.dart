@@ -44,20 +44,5 @@ class WizardBloc extends Bloc<WizardEvent, WizardState> {
 
     emit(WizardCommented(
         primaryComment: message, secondaryTopic: "<quip for humidity>"));
-    // final weatherData = await _weatherRepository.getWeather(
-    //     latitude: event.location.latitude.toDouble(),
-    //     longitude: event.location.longitude.toDouble());
-
-    // if (weatherData
-    //     case WeatherEntity(
-    //       weatherNow: var now?,
-    //       dailyForecast: var daily,
-    //       hourlyForecast: var hourly
-    //     )) {
-    //   emit(WeatherUpdated(
-    //       weatherNow: now,
-    //       dailyForecast: daily,
-    //       hourlyForecast: hourly,
-    //       message: "test"));
   }
 }

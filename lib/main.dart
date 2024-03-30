@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:weather_wizard/core/theme/theme.dart';
 import 'package:weather_wizard/features/location/data/repository/location_repository.dart';
 import 'package:weather_wizard/features/location/domain/repository/location_repository.dart';
 import 'package:weather_wizard/features/location/presentation/bloc/location_bloc.dart';
+import 'package:weather_wizard/features/location/presentation/bloc/location_event.dart';
 import 'package:weather_wizard/features/preferences/data/repository/preferences_repository.dart';
 import 'package:weather_wizard/features/preferences/domain/repository/preferences_repository.dart';
 import 'package:weather_wizard/features/preferences/presentation/bloc/preferences_bloc.dart';
@@ -17,6 +19,7 @@ import 'package:weather_wizard/features/wizard/domain/repository/wizard_reposito
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_bloc.dart';
 
 void main() {
+  Gemini.init(apiKey: 'AIzaSyAE5BwRSbLBg7bX3EdR0RYs0RuhySr7qV4');
   final weatherRepository = WeatherRepositoryImpl();
   final locationRepository = LocationRepositoryImpl();
   final preferenceRepository = PreferencesRepositoryImpl();
@@ -59,17 +62,18 @@ class WeatherWizard extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider<PreferencesBloc>(
+            create: (context) =>
+                PreferencesBloc(context.read<PreferencesRepository>())
+                  ..add(LoadPreferences()),
+          ),
           BlocProvider<WeatherBloc>(
               create: (context) =>
                   WeatherBloc(context.read<WeatherRepository>())),
           BlocProvider<LocationBloc>(
             create: (context) =>
-                LocationBloc(context.read<LocationRepository>()),
-          ),
-          BlocProvider<PreferencesBloc>(
-            create: (context) =>
-                PreferencesBloc(context.read<PreferencesRepository>())
-                  ..add(LoadPreferences()),
+                LocationBloc(context.read<LocationRepository>())
+                  ..add(RequestedLocation()),
           ),
           BlocProvider<WizardBloc>(
             create: (context) => WizardBloc(context.read<WizardRepository>()),

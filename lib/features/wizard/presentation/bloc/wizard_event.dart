@@ -1,4 +1,5 @@
 import 'package:weather_wizard/features/weather/domain/entities/weather.dart';
+import 'package:weather_wizard/features/weather/domain/entities/weather_now.dart';
 
 sealed class WizardEvent {}
 

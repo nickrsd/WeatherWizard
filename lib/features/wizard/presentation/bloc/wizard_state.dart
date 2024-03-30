@@ -11,6 +11,8 @@ class WizardDivinedLocation extends WizardState {
   WizardDivinedLocation({required this.location, required this.description});
 }
 
+class WizardBusy extends WizardState {}
+
 class WizardCommented extends WizardState {
   final String primaryComment;
   final String secondaryTopic;
@@ -18,13 +20,13 @@ class WizardCommented extends WizardState {
   WizardCommented({required this.primaryComment, required this.secondaryTopic});
 }
 
-class WizardBroadcastedThoughts extends WizardState {
-  final String topicalComment;
-  final Set<String> keyedThoughts;
+// class WizardBroadcastedThoughts extends WizardState {
+//   final String topicalComment;
+//   final Set<String> keyedThoughts;
 
-  WizardBroadcastedThoughts(
-      {required this.topicalComment, required this.keyedThoughts});
-}
+//   WizardBroadcastedThoughts(
+//       {required this.topicalComment, required this.keyedThoughts});
+// }
 
 class WizardFailedDiviniation extends WizardState {
   Geolocation? location;

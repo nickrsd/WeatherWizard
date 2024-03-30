@@ -12,6 +12,7 @@ import 'package:weather_wizard/features/weather/presentation/bloc/weather_bloc.d
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_event.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_state.dart';
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_bloc.dart';
+import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_event.dart';
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_state.dart';
 
 class GeolocationSearch extends StatefulWidget {
@@ -64,34 +65,22 @@ class _GeolocationSearchState extends State<GeolocationSearch> {
     ]);
   }
 
-  Widget _buildLocationText(LocationState state) {
+  Widget _buildWizardText(WizardState state) {
     return switch (state) {
-      LocationUpdated(message: final msg) =>
-        BlocBuilder<WizardBloc, WizardState>(
-          buildWhen: (previous, current) =>
-              current is WeatherUpdated && previous != current,
-          builder: (context, state) {
-            if (state
-                case WeatherUpdated(
-                  weatherNow: WeatherEntity(),
-                  :String message
-                )) {
-              return _buildAnimatedText(message, 90, false);
-            } else {
-              return _buildAnimatedText(
-                  '................................', 35, true);
-            }
-          },
-        ),
-      LocationSearchFailed(message: final msg) =>
+      WizardCommented(
+        primaryComment: final mainResponse,
+        secondaryTopic: String adjacentResponse
+      ) =>
+        _buildAnimatedText(mainResponse, 90, false),
+      WizardFailedDiviniation(message: final msg) =>
         _buildAnimatedText(msg, 115, false),
-      LocationLoading() =>
-        _buildAnimatedText('..........................', 65, true),
-      LocationUnknown() => _buildAnimatedText(
+      WizardBusy() ||
+      WizardDivinedLocation() =>
+        _buildAnimatedText('................................', 35, true),
+      WizardInitial() => _buildAnimatedText(
           "Divining the weather again am I? Well, let's get on with it then, I don't have all day.",
           100,
           false),
-      LocationInitial() => const SizedBox.shrink()
     };
   }
 
@@ -103,13 +92,17 @@ class _GeolocationSearchState extends State<GeolocationSearch> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          BlocBuilder<LocationBloc, LocationState>(
+          BlocBuilder<WizardBloc, WizardState>(
             builder: (context, state) {
-              if (state case LocationUpdated(:final location, message: _)) {
+              if (state
+                  case WizardDivinedLocation(
+                    location: final loc,
+                    description: final desc
+                  )) {
                 final preferences =
-                    context.read<PreferencesBloc>() as UpdatedPreferences;
+                    context.read<PreferencesBloc>().state as UpdatedPreferences;
                 context.read<WeatherBloc>().add(WeatherRequested(
-                    location: location,
+                    location: loc,
                     dailyForecast: preferences.dailyForecast,
                     hourlyForecast: preferences.hourlyForecast,
                     temperatureUnit: preferences.tempPreference));
@@ -122,7 +115,7 @@ class _GeolocationSearchState extends State<GeolocationSearch> {
                   SizedBox(
                       width: double.infinity,
                       height: 60,
-                      child: _buildLocationText(state)),
+                      child: _buildWizardText(state)),
                 ],
               );
             },
@@ -156,8 +149,8 @@ class _GeolocationSearchState extends State<GeolocationSearch> {
                     iconSize: 32,
                     onPressed: () {
                       context
-                          .read<LocationBloc>()
-                          .add(SearchedLocation(place: _text));
+                          .read<WizardBloc>()
+                          .add(WizardEnvisionedLocation(place: _text));
                     }),
               ],
             ),
@@ -173,3 +166,30 @@ class _GeolocationSearchState extends State<GeolocationSearch> {
     super.dispose();
   }
 }
+
+      // LocationUpdated(message: final msg) =>
+      //   BlocBuilder<WeatherBloc, WeatherState>(
+      //     // buildWhen: (previous, current) =>
+      //     //     current is WizardCommented && previous != current,
+      //     builder: (context, state) {
+      //       if (state
+      //           case WizardCommented(
+      //             primaryComment: final mainResponse,
+      //             secondaryTopic: String adjacentResponse
+      //           )) {
+      //         return _buildAnimatedText(mainResponse, 90, false);
+      //       } else {
+      //         return _buildAnimatedText(
+      //             '................................', 35, true);
+      //       }
+      //     },
+      //   ),
+      // LocationSearchFailed(message: final msg) =>
+      //   _buildAnimatedText(msg, 115, false),
+      // LocationLoading() =>
+      //   _buildAnimatedText('..........................', 65, true),
+      // LocationUnknown() => _buildAnimatedText(
+      //     "Divining the weather again am I? Well, let's get on with it then, I don't have all day.",
+      //     100,
+      //     false),
+      // WizardInitial() => const SizedBox.shrink()

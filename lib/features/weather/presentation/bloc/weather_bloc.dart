@@ -24,6 +24,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
           hourlyForecast: var hourly
         )) {
       emit(WeatherUpdated(
+          weather: weatherData,
           weatherNow: now,
           dailyForecast: daily,
           hourlyForecast: hourly,
