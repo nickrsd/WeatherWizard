@@ -1,7 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_wizard/features/preferences/presentation/bloc/preferences_bloc.dart';
 import 'package:weather_wizard/features/weather/data/models/weather_condition.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_bloc.dart';
+import 'package:weather_wizard/features/weather/presentation/bloc/weather_event.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_state.dart';
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_bloc.dart';
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_event.dart';
@@ -11,18 +13,28 @@ class WeatherNow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WeatherBloc, WeatherState>(
-      // buildWhen: (previousState, state) =>
-      //     (state is CurrentWeatherUpdate && state != previousState) ||
-      //     state is CurrentWeatherLoading,
-      builder: (context, state) {
+    return BlocConsumer<WeatherBloc, WeatherState>(
+      listener: (context, state) {
         if (state
-            case WeatherUpdated(
-              weatherNow: var weather,
-              weather: var weatherRaw
-            )) {
-          context.read<WizardBloc>().add(WizardCommentRequested(
-              weather: weatherRaw, place: state.message));
+            case WeatherUpdated(weather: var weather, message: final msg)) {
+          context
+              .read<WizardBloc>()
+              .add(WizardCommentRequested(weather: weather, place: msg));
+        }
+        if (state is WeatherInitial) {
+          final userData = context.watch<PreferencesBloc>().state;
+          context.read<WeatherBloc>().add(WeatherRequested(
+              location: userData.preferences.geolocation,
+              dailyForecast: userData.preferences.dailyForecastDays,
+              hourlyForecast: userData.preferences.hourlyForecastHours,
+              temperatureUnit: userData.preferences.preferredUnits));
+        }
+      },
+      buildWhen: (previous, current) {
+        return current != previous;
+      },
+      builder: (context, weatherState) {
+        if (weatherState case WeatherUpdated(weatherNow: var weather)) {
           return Stack(children: [
             weather.condition != null
                 ? Positioned(
@@ -72,7 +84,7 @@ class WeatherNow extends StatelessWidget {
             ),
           ]);
         } else {
-          return SizedBox.shrink();
+          return const SizedBox.shrink();
         }
       },
     );

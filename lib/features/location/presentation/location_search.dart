@@ -2,15 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_wizard/features/location/presentation/bloc/location_bloc.dart';
-import 'package:weather_wizard/features/location/presentation/bloc/location_event.dart';
-import 'package:weather_wizard/features/location/presentation/bloc/location_state.dart';
-import 'package:weather_wizard/features/preferences/presentation/bloc/preferences_bloc.dart';
-import 'package:weather_wizard/features/preferences/presentation/bloc/preferences_state.dart';
-import 'package:weather_wizard/features/weather/domain/entities/weather.dart';
-import 'package:weather_wizard/features/weather/presentation/bloc/weather_bloc.dart';
-import 'package:weather_wizard/features/weather/presentation/bloc/weather_event.dart';
-import 'package:weather_wizard/features/weather/presentation/bloc/weather_state.dart';
+
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_bloc.dart';
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_event.dart';
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_state.dart';
@@ -94,19 +86,6 @@ class _GeolocationSearchState extends State<GeolocationSearch> {
         children: [
           BlocBuilder<WizardBloc, WizardState>(
             builder: (context, state) {
-              if (state
-                  case WizardDivinedLocation(
-                    location: final loc,
-                    description: final desc
-                  )) {
-                final preferences =
-                    context.read<PreferencesBloc>().state as UpdatedPreferences;
-                context.read<WeatherBloc>().add(WeatherRequested(
-                    location: loc,
-                    dailyForecast: preferences.dailyForecast,
-                    hourlyForecast: preferences.hourlyForecast,
-                    temperatureUnit: preferences.tempPreference));
-              }
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

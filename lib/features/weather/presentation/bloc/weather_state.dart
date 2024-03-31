@@ -22,5 +22,3 @@ class WeatherUpdated extends WeatherState {
       required this.hourlyForecast,
       required this.message});
 }
-
-class WeatherFailure extends WeatherState {}
