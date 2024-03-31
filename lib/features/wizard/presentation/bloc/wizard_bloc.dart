@@ -18,8 +18,8 @@ class WizardBloc extends Bloc<WizardEvent, WizardState> {
       WizardEnvisionedLocation event, Emitter<WizardState> emit) async {
     try {
       final {
-        'latitude': num aiPoweredLatitude,
-        'longitude': num aiPoweredLongitude,
+        'latitude': double aiPoweredLatitude,
+        'longitude': double aiPoweredLongitude,
         'name': String aiProvidedName,
         'description': String aiPoweredDescription
       } = await _wizardRepository.divineLocation(event.place);

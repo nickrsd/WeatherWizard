@@ -7,6 +7,7 @@ import 'package:weather_wizard/features/weather/presentation/bloc/weather_event.
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_state.dart';
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_bloc.dart';
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_event.dart';
+import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_state.dart';
 
 class WeatherNow extends StatelessWidget {
   const WeatherNow({super.key});
@@ -34,6 +35,7 @@ class WeatherNow extends StatelessWidget {
         return current != previous;
       },
       builder: (context, weatherState) {
+        final wizardState = context.watch<WizardBloc>().state;
         if (weatherState case WeatherUpdated(weatherNow: var weather)) {
           return Stack(children: [
             weather.condition != null

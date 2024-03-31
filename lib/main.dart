@@ -85,7 +85,6 @@ class WeatherWizard extends StatelessWidget {
           theme: AppTheme.appDarkTheme,
           home: Scaffold(
               backgroundColor: AppTheme.appDarkTheme.scaffoldBackgroundColor,
-              appBar: AppBar(),
               body: const WeatherDashboard()),
         ),
       ),

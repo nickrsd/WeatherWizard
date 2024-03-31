@@ -81,6 +81,16 @@ flutter:
     - assets/images/pixel_status_snow.png
     - assets/images/pixel_card.png
     - assets/images/pixel_card_white.png
+    - assets/images/weather_clearskies_animated.gif
+    - assets/images/weather_clearskies_night_animated.gif
+    - assets/images/weather_clearskies_animated.gif
+    - assets/images/weather_foggy_animated.gif
+    - assets/images/weather_portal.gif
+    - assets/images/weather_snowy_day.gif
+    - assets/images/weather_storm.gif
+    - assets/images/quiet_flame.gif
+    - assets/images/dungeon_view.gif
+    - assets/images/steel_wall.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

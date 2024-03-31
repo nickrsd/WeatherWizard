@@ -6,6 +6,7 @@ import 'package:weather_wizard/features/location/presentation/location_search.da
 import 'package:weather_wizard/features/preferences/presentation/bloc/preferences_bloc.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_bloc.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_event.dart';
+import 'package:weather_wizard/features/weather/presentation/bloc/weather_state.dart';
 import 'package:weather_wizard/features/weather/presentation/widgets/weather_forecast_tarot.dart';
 import 'package:weather_wizard/features/weather/presentation/widgets/weather_now_detail.dart';
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_bloc.dart';
@@ -24,19 +25,22 @@ class WeatherDashboard extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Stack(children: [
-          Container(
-            constraints: const BoxConstraints(minHeight: 150, maxHeight: 320),
-            child: ClipRRect(
-                child: Align(
-              widthFactor: 2.0,
-              heightFactor: 2.0,
-              child: Image.asset(
-                "assets/images/rainy.gif",
-                fit: BoxFit.cover,
-                scale: 0.1,
-              ),
-            )),
-          ),
+          BlocBuilder<WeatherBloc, WeatherState>(builder: (context, state) {
+            final weather = context.read<WeatherBloc>().state;
+            return Container(
+              constraints: const BoxConstraints(minHeight: 150, maxHeight: 420),
+              child: ClipRRect(
+                  child: Align(
+                widthFactor: 2.0,
+                heightFactor: 2.0,
+                child: Image.asset(
+                  "assets/images/${weather.backgroundPath}",
+                  fit: BoxFit.fill,
+                  scale: 0.1,
+                ),
+              )),
+            );
+          }),
           BlocListener<WizardBloc, WizardState>(
             listener: (context, state) {
               final userData = context.read<PreferencesBloc>().state;
