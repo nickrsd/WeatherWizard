@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:weather_wizard/bloc_observer.dart';
@@ -20,6 +21,10 @@ import 'package:weather_wizard/features/wizard/domain/repository/wizard_reposito
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_bloc.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   Gemini.init(apiKey: 'AIzaSyAE5BwRSbLBg7bX3EdR0RYs0RuhySr7qV4');
   Bloc.observer = const AppBlocObserver();
   final weatherRepository = WeatherRepositoryImpl();
