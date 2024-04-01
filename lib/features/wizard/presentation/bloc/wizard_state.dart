@@ -1,36 +1,43 @@
+import 'package:equatable/equatable.dart';
 import 'package:weather_wizard/core/common/geolocation.dart';
 
-sealed class WizardState {}
+sealed class WizardState extends Equatable {}
 
-class WizardInitial extends WizardState {}
-
-class WizardDivinedLocation extends WizardState {
-  Geolocation location;
-  String description;
-
-  WizardDivinedLocation({required this.location, required this.description});
+class WizardInitial extends WizardState {
+  @override
+  List<Object?> get props => [];
 }
 
-class WizardBusy extends WizardState {}
+class WizardDivinedLocation extends WizardState {
+  final PlaceDescriptor place;
+
+  WizardDivinedLocation({required this.place});
+
+  @override
+  List<Object?> get props => [place];
+}
+
+class WizardBusy extends WizardState {
+  @override
+  List<Object?> get props => [];
+}
 
 class WizardCommented extends WizardState {
   final String primaryComment;
   final String secondaryTopic;
 
   WizardCommented({required this.primaryComment, required this.secondaryTopic});
+
+  @override
+  List<Object?> get props => [primaryComment, secondaryTopic];
 }
 
-// class WizardBroadcastedThoughts extends WizardState {
-//   final String topicalComment;
-//   final Set<String> keyedThoughts;
-
-//   WizardBroadcastedThoughts(
-//       {required this.topicalComment, required this.keyedThoughts});
-// }
-
 class WizardFailedDiviniation extends WizardState {
-  Geolocation? location;
-  String message;
+  final Geolocation? location;
+  final String message;
 
   WizardFailedDiviniation({this.location, required this.message});
+
+  @override
+  List<Object?> get props => [location, message];
 }
