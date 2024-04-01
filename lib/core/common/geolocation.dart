@@ -14,6 +14,9 @@ class Geolocation extends Equatable {
   @override
   List<Object?> get props => [latitude, longitude, name];
 
+  Map<String, dynamic> toJson() =>
+      <String, dynamic>{'latitude': latitude, 'longitude': longitude};
+
   factory Geolocation.fromJson(Map<String, dynamic> json) {
     final {
       'latitude': num latitude,
