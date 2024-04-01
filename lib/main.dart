@@ -22,7 +22,7 @@ import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_bloc.dar
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([
+  SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
   Gemini.init(apiKey: 'AIzaSyAE5BwRSbLBg7bX3EdR0RYs0RuhySr7qV4');
