@@ -1,14 +1,14 @@
 import 'package:weather_wizard/core/common/geolocation.dart';
+import 'package:weather_wizard/core/common/place.dart';
 
 sealed class WizardState {}
 
 class WizardInitial extends WizardState {}
 
 class WizardDivinedLocation extends WizardState {
-  Geolocation location;
-  String description;
+  PlaceDescriptor place;
 
-  WizardDivinedLocation({required this.location, required this.description});
+  WizardDivinedLocation({required this.place});
 }
 
 class WizardBusy extends WizardState {}

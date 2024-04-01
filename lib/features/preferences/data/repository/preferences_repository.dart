@@ -33,8 +33,7 @@ class PreferencesRepositoryImpl implements PreferencesRepository {
     final num longitude = storage.getDouble('longitude') ??
         defaultPreferences.geolocation.longitude;
 
-    final geolocation = Geolocation(
-        latitude: latitude, longitude: longitude, name: "Somewhere");
+    final geolocation = Geolocation(latitude: latitude, longitude: longitude);
 
     return UserPreferenceEntity(
         preferredUnits: TemperatureUnitExtension.fromString(preferredUnits) ??

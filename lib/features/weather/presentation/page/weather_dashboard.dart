@@ -44,9 +44,9 @@ class WeatherDashboard extends StatelessWidget {
           BlocListener<WizardBloc, WizardState>(
             listener: (context, state) {
               final userData = context.read<PreferencesBloc>().state;
-              if (state case WizardDivinedLocation(location: final loc)) {
+              if (state case WizardDivinedLocation(place: final place)) {
                 context.read<WeatherBloc>().add(WeatherRequested(
-                    location: loc,
+                    place: place,
                     dailyForecast: userData.preferences.dailyForecastDays,
                     hourlyForecast: userData.preferences.hourlyForecastHours,
                     temperatureUnit: userData.preferences.preferredUnits));

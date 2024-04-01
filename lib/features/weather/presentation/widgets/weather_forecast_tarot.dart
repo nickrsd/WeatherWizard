@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_wizard/features/weather/data/models/weather_condition.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_bloc.dart';
@@ -32,7 +30,7 @@ class WeatherForecast extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 6.0),
                   child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         image: DecorationImage(
                           image:
                               AssetImage("assets/images/pixel_card_white.png"),
@@ -91,7 +89,7 @@ class WeatherForecast extends StatelessWidget {
               },
             );
           } else {
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           }
         },
       ),

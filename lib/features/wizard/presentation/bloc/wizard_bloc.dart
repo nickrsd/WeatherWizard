@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:weather_wizard/core/common/geolocation.dart';
+import 'package:weather_wizard/core/common/place.dart';
 import 'package:weather_wizard/features/wizard/data/model/wizard.dart';
 import 'package:weather_wizard/features/wizard/data/repository/wizard_repository.dart';
 import 'package:weather_wizard/features/wizard/domain/repository/wizard_repository.dart';
@@ -21,15 +22,17 @@ class WizardBloc extends Bloc<WizardEvent, WizardState> {
         'latitude': double aiPoweredLatitude,
         'longitude': double aiPoweredLongitude,
         'name': String aiProvidedName,
-        'description': String aiPoweredDescription
+        'description': String aiPoweredDescription,
+        'feature': String aiPoweredLocationFeature
       } = await _wizardRepository.divineLocation(event.place);
 
       emit(WizardDivinedLocation(
-        location: Geolocation(
-            latitude: aiPoweredLatitude,
-            longitude: aiPoweredLongitude,
-            name: aiProvidedName),
-        description: aiPoweredDescription,
+        place: PlaceDescriptor(
+            name: aiProvidedName,
+            notableFeature: aiPoweredLocationFeature,
+            description: aiPoweredDescription,
+            location: Geolocation(
+                latitude: aiPoweredLatitude, longitude: aiPoweredLongitude)),
       ));
     } on GeminiResultsFailure catch (_) {
       emit(WizardFailedDiviniation(

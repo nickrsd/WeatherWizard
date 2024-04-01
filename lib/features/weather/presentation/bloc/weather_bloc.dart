@@ -18,8 +18,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       WeatherRequested event, Emitter<WeatherState> emit) async {
     emit(WeatherLoading(backgroundPath: "weather_portal.gif"));
     final weatherData = await _weatherRepository.getWeather(
-        latitude: event.location.latitude.toDouble(),
-        longitude: event.location.longitude.toDouble());
+        latitude: event.place.location.latitude.toDouble(),
+        longitude: event.place.location.longitude.toDouble());
 
     if (weatherData
         case WeatherEntity(
@@ -32,7 +32,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
           weatherNow: now,
           dailyForecast: daily,
           hourlyForecast: hourly,
-          message: "test",
+          place: event.place,
           backgroundPath: WeatherConditionExtension.backgroundPath(
               now.condition ?? WeatherCondition.unknown,
               now.isDaytime ?? true)));

@@ -59,10 +59,7 @@ class _GeolocationSearchState extends State<GeolocationSearch> {
 
   Widget _buildWizardText(WizardState state) {
     return switch (state) {
-      WizardCommented(
-        primaryComment: final mainResponse,
-        secondaryTopic: String adjacentResponse
-      ) =>
+      WizardCommented(primaryComment: final mainResponse, secondaryTopic: _) =>
         _buildAnimatedText(mainResponse, 90, false),
       WizardFailedDiviniation(message: final msg) =>
         _buildAnimatedText(msg, 115, false),
@@ -114,9 +111,8 @@ class _GeolocationSearchState extends State<GeolocationSearch> {
                     child: TextField(
                       controller: _textController,
                       decoration: const InputDecoration(
-                        labelText: "Request evil wizard's weather divination",
-                        hintText:
-                            "The coldest place | Chicago-ish | wizard's pick",
+                        labelText: "Request evil wizard's divination",
+                        hintText: "Seattle, coldest place, a world wonder",
                       ),
                     ),
                   ),

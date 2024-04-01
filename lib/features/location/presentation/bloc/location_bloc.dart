@@ -21,9 +21,9 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
         message: "location updated",
         placeDescription: "N/A",
         location: Geolocation(
-            latitude: location.latitude,
-            longitude: location.longitude,
-            name: "${location.timestamp}")));
+          latitude: location.latitude,
+          longitude: location.longitude,
+        )));
   }
 
   void onSearchedLocation(
