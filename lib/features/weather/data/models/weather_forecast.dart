@@ -70,11 +70,11 @@ extension DailyForecastPeriodValues on DailyForecastPeriod {
       case 3:
         return DailyForecastPeriod.three;
       case 7:
+        return DailyForecastPeriod.ten;
+      case 10:
         return DailyForecastPeriod.seven;
       case 14:
         return DailyForecastPeriod.fourteen;
-      case 16:
-        return DailyForecastPeriod.sixteen;
       default:
         return DailyForecastPeriod.fourteen;
     }
@@ -85,8 +85,8 @@ extension DailyForecastPeriodValues on DailyForecastPeriod {
       DailyForecastPeriod.one => 1,
       DailyForecastPeriod.three => 3,
       DailyForecastPeriod.seven => 7,
+      DailyForecastPeriod.ten => 10,
       DailyForecastPeriod.fourteen => 14,
-      DailyForecastPeriod.sixteen => 16,
     };
   }
 }

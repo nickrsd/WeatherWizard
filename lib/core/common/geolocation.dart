@@ -6,25 +6,19 @@ import 'package:equatable/equatable.dart';
 class Geolocation extends Equatable {
   final num latitude;
   final num longitude;
-  final String name;
 
-  const Geolocation(
-      {required this.latitude, required this.longitude, required this.name});
+  const Geolocation({required this.latitude, required this.longitude});
 
   @override
-  List<Object?> get props => [latitude, longitude, name];
+  List<Object?> get props => [latitude, longitude];
 
   Map<String, dynamic> toJson() =>
       <String, dynamic>{'latitude': latitude, 'longitude': longitude};
 
   factory Geolocation.fromJson(Map<String, dynamic> json) {
-    final {
-      'latitude': num latitude,
-      'longitude': num longitude,
-      'name': String name
-    } = json;
+    final {'latitude': num latitude, 'longitude': num longitude} = json;
 
-    return Geolocation(latitude: latitude, longitude: longitude, name: name);
+    return Geolocation(latitude: latitude, longitude: longitude);
   }
 }
 
@@ -33,8 +27,7 @@ extension GeolocationRandom on Geolocation {
   static Geolocation somewhereInTheWorld() {
     final num latitude = Random().randomDouble(-90, 90);
     final num longitude = Random().randomDouble(-180, 180);
-    return Geolocation(
-        latitude: latitude, longitude: longitude, name: "Somewhere");
+    return Geolocation(latitude: latitude, longitude: longitude);
   }
 }
 

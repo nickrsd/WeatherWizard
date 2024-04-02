@@ -1,3 +1,4 @@
+import 'package:weather_wizard/core/common/geolocation.dart';
 import 'package:weather_wizard/core/common/temperature.dart';
 import 'package:weather_wizard/features/weather/domain/entities/weather_forecast_period.dart';
 
@@ -20,7 +21,12 @@ class PickDailyForecastPeriod extends PreferencesEvent {
 }
 
 class PickHourlyForecastPeriod extends PreferencesEvent {
-  final DailyForecastPeriod period;
+  final HourlyForecastPeriod period;
 
   PickHourlyForecastPeriod({required this.period});
+}
+
+class PickDefaultLocationShown extends PreferencesEvent {
+  final Geolocation location;
+  PickDefaultLocationShown({required this.location});
 }

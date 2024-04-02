@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
@@ -8,7 +9,36 @@ import 'package:weather_wizard/features/wizard/domain/repository/wizard_reposito
 /// Exception thrown when gemini fails to get us data
 class GeminiResultsFailure extends Error {}
 
+typedef WizardDivineLocationResponse = Map<String, dynamic>;
+
+// TODO: make [getWizardsWeatherComment] & [divineLocation] into a generic interface stream, extract this into specialized gemini package.
 class WizardRepositoryImpl extends WizardRepository {
+  final _commentStreamController = StreamController<String>();
+  final _locationStreamController =
+      StreamController<WizardDivineLocationResponse>();
+
+  @override
+  Stream<WizardCommentResponse> get weatherResponse async* {
+    yield* _commentStreamController.stream;
+  }
+
+  @override
+  Stream<WizardDivineLocationResponse> get locationResponse async* {
+    yield* _locationStreamController.stream;
+  }
+
+  @override
+  void publishWizardsWeatherCommentRequest(
+      WeatherEntity weather, String? place) {
+    getWizardsWeatherComment(weather, place)
+        .then((value) => _commentStreamController.add(value));
+  }
+
+  @override
+  void publishDivineLocationRequest(String query) {
+    divineLocation(query).then((value) => _locationStreamController.add(value));
+  }
+
   @override
   Future<String> getWizardsWeatherComment(
       WeatherEntity weather, String? place) async {
@@ -63,9 +93,11 @@ class WizardRepositoryImpl extends WizardRepository {
           threshold: SafetyThreshold.blockOnlyHigh),
     ], geminiPrompt);
     if (result != null && result.output != null) {
-      return result.output!;
+      final outputMessage = result.output!;
+      _commentStreamController.add(outputMessage);
+      return outputMessage;
     } else {
-      throw GeminiResultsFailure;
+      throw GeminiResultsFailure as Error;
     }
   }
 
@@ -74,9 +106,9 @@ class WizardRepositoryImpl extends WizardRepository {
     final gemini = Gemini.instance;
 
     const String codeFormat =
-        "{'latitude': <double>,'longitude': <double>,'name': <name>,'description': <String>}";
+        "{'latitude': <double>,'longitude': <double>,'name': <name>,'description': <String>, 'feature': <String>}";
     const String instructions =
-        "When I give you a phrase, that phrase is a description that is intended to describe a place on earth in some way, and your role is to act as an AI backed API server that only relies on factual data it knows about the world. My request might be a single word, like 'Chicago', or as fantastical as 'the center of Mordor', you'll always select a real latitude and longitude that matches, even if the best you can do is pick the best matching real world place. All your responses will only include a json string (don't format with a  ```json ``` style code block), with properties for latitude, longitude, name, and description. The name should always be a name that would be searchable in map databases like google maps, the description is a one sentence summary of why you chose this location. Your json response will be in the following format, replace <type> placeholders with values formatted for that type. Round doubles to 3 decimal places. Wrap the entire response in double quotes";
+        "When I give you a phrase, that phrase is a description that is intended to describe a place on earth in some way, and your role is to act as an AI backed API server that only relies on factual data it knows about the world. My request might be a single word, like 'Chicago', or as fantastical as 'the center of Mordor', you'll always select a real latitude and longitude that matches, even if the best you can do is pick the best matching real world place. All your responses will only include a json string (don't format with a  ```json ``` style code block), with properties for latitude, longitude, name, description, and feature. The name should always be a name that would be searchable in map databases like google maps that defines the primary area, such as a town or city name, and absent that, a known name or landmark for the region. The  description is is a one sentence summary of why you chose this location. The feature should be something interesting, fascinating, or funny about the region that's factual, written 45 characters or less. Your json response will be in the following format, replace <type> placeholders with values formatted for that type. Round doubles to 3 decimal places. Wrap the entire response in double quotes";
     final String prompt =
         "$instructions $codeFormat Your role begins now, respond to the query for the phrase: '$query'";
 
@@ -93,9 +125,17 @@ class WizardRepositoryImpl extends WizardRepository {
       final String noncodeString = result.output!.split("```").firstWhere(
             (element) => element.isNotEmpty,
           );
-      return jsonDecode(noncodeString) as Map<String, dynamic>;
+
+      final jsonBlob = jsonDecode(noncodeString) as Map<String, dynamic>;
+      _locationStreamController.add(jsonBlob);
+      return jsonBlob;
     } else {
-      throw GeminiResultsFailure;
+      throw GeminiResultsFailure as Error;
     }
+  }
+
+  void dispose() {
+    _commentStreamController.close();
+    _locationStreamController.close();
   }
 }

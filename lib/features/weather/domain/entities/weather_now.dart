@@ -14,9 +14,11 @@ class WeatherNowEntity extends Equatable {
   final bool? isDaytime;
   final num? precipitationChance;
   final String? time;
+  final num? apparentTemperature;
 
   const WeatherNowEntity(
       {this.temperature,
+      this.apparentTemperature,
       this.relativeHumidity,
       this.condition,
       this.isDaytime,
@@ -26,6 +28,7 @@ class WeatherNowEntity extends Equatable {
   @override
   List<Object?> get props => [
         temperature,
+        apparentTemperature,
         relativeHumidity,
         condition,
         isDaytime,

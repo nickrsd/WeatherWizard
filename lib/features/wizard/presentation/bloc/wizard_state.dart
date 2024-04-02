@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:weather_wizard/core/common/geolocation.dart';
+import 'package:weather_wizard/core/common/place.dart';
 
 sealed class WizardState extends Equatable {}
 

@@ -1,7 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_wizard/core/common/place.dart';
+import 'package:weather_wizard/features/preferences/presentation/bloc/preferences_bloc.dart';
 import 'package:weather_wizard/features/weather/data/models/weather_condition.dart';
+import 'package:weather_wizard/features/weather/domain/entities/weather.dart';
+import 'package:weather_wizard/features/weather/domain/entities/weather_now.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_bloc.dart';
+import 'package:weather_wizard/features/weather/presentation/bloc/weather_event.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_state.dart';
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_bloc.dart';
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_event.dart';
@@ -11,11 +17,8 @@ class WeatherNow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WeatherBloc, WeatherState>(
-      // buildWhen: (previousState, state) =>
-      //     (state is CurrentWeatherUpdate && state != previousState) ||
-      //     state is CurrentWeatherLoading,
-      builder: (context, state) {
+    return BlocConsumer<WeatherBloc, WeatherState>(
+      listener: (context, state) {
         if (state
             case WeatherUpdated(weather: var weather, place: final place)) {
           context

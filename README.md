@@ -1,6 +1,7 @@
 # WeatherWizard
 
-What's an evil wizard to do when trapped in an app and forced to divine weather predictions for eternity
+Welcome to Weather Wizard
+What's an evil wizard to do when trapped in an app and forced to divine weather predictions for eternity?
 
 # Getting Started
 
@@ -10,14 +11,16 @@ to build the project just a standard
 To run the project
 `flutter run`
 
-to test the project
+to run tests in the project
 `flutter test`
+
+## troubleshooting
 
 I think that's it ¯\_(ツ)\_/¯
 
 # Thoughts
 
-I didn't get around to fully implementing the challenges, but hopefully you'll see my approach to building applications. THere were quite a few more things I wanted to add, here were some ideas
+I didn't get around to fully implementing all the challenge items, but hopefully you'll see my approach to building applications. THere were quite a few more things I wanted to add, here were some ideas
 
 - A die to tap to reroll the wizards response, which would gradually get him to talk more about his dark past.
 - Didn't get around to making him walk around the room. Was going to sync sprite movement to a particle effect that flashed and replaced the weather.

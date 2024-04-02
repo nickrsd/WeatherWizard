@@ -2,8 +2,8 @@ import 'package:weather_wizard/features/preferences/domain/entity/preference.dar
 
 class UserPreference extends UserPreferenceEntity {
   const UserPreference(
-      {super.preferFahrenheight,
-      super.dailyForecastDays,
-      super.hourlyForecastHours,
-      super.geolocation});
+      {required super.preferredUnits,
+      required super.dailyForecastDays,
+      required super.hourlyForecastHours,
+      required super.geolocation});
 }
