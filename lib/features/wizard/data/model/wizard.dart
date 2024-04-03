@@ -1,8 +1,13 @@
 import 'dart:math';
 
-import 'package:weather_wizard/features/wizard/presentation/entity/wizard.dart';
+import 'package:weather_wizard/features/wizard/domain/entities/wizard.dart';
 
-class Wizard extends WizardEntity {}
+class Wizard extends WizardEntity {
+  Wizard(
+      {required super.asset,
+      required super.xTranslationOffset,
+      required super.behavior});
+}
 
 extension WizardCringeyComment on Wizard {
   static String arrivalMessage(String place) {

@@ -29,7 +29,7 @@ class WizardBloc extends Bloc<WizardEvent, WizardState> {
       emit(WizardDivinedLocation(
         place: PlaceDescriptor(
             name: aiProvidedName,
-            notableFeature: aiPoweredLocationFeature,
+            feature: aiPoweredLocationFeature,
             description: aiPoweredDescription,
             location: Geolocation(
                 latitude: aiPoweredLatitude, longitude: aiPoweredLongitude)),
@@ -42,10 +42,16 @@ class WizardBloc extends Bloc<WizardEvent, WizardState> {
 
   void onWizardCommentRequested(
       WizardCommentRequested event, Emitter<WizardState> emit) async {
-    final message = await _wizardRepository.getWizardsWeatherComment(
-        event.weather, event.place);
+    try {
+      final message = await _wizardRepository.getWizardsWeatherComment(
+          event.weather, event.place);
 
-    emit(WizardCommented(
-        primaryComment: message, secondaryTopic: "<quip for humidity>"));
+      emit(WizardCommented(
+          primaryComment: message, secondaryTopic: "<quip for humidity>"));
+    } on GeminiResultsFailure catch (_) {
+      emit(WizardFailedDiviniation(
+          message: WizardCringeyComment.nothingAt(
+              "strange, my magic isn't working. Let's try somewhere else.")));
+    }
   }
 }

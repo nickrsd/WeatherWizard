@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_wizard/core/common/place.dart';
 import 'package:weather_wizard/features/preferences/presentation/bloc/preferences_bloc.dart';
 import 'package:weather_wizard/features/weather/data/models/weather_condition.dart';
-import 'package:weather_wizard/features/weather/domain/entities/weather.dart';
 import 'package:weather_wizard/features/weather/domain/entities/weather_now.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_bloc.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_event.dart';
@@ -30,7 +29,7 @@ class WeatherNow extends StatelessWidget {
           context.read<WeatherBloc>().add(WeatherRequested(
               place: PlaceDescriptor(
                   name: '',
-                  notableFeature: '',
+                  feature: '',
                   description: '',
                   location: userData.preferences.geolocation),
               dailyForecast: userData.preferences.dailyForecastDays,
@@ -124,7 +123,7 @@ class _WeatherNowLabelsTwo extends StatelessWidget {
                                   color: Color.fromARGB(255, 0, 0, 0),
                                 )
                               ], fontFamily: 'crang', fontSize: 14),
-                              place.notableFeature),
+                              place.feature),
                         ),
                       ),
                       weather.condition != null
@@ -260,8 +259,7 @@ class _WeatherNowLabels extends StatelessWidget {
         top: 150,
         child: Column(children: [
           Text(style: const TextStyle(fontFamily: 'crang'), place.name),
-          Text(
-              style: const TextStyle(fontFamily: 'crang'), place.notableFeature)
+          Text(style: const TextStyle(fontFamily: 'crang'), place.feature)
         ]),
       )
     ]);
