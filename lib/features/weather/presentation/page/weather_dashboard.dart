@@ -11,7 +11,7 @@ import 'package:weather_wizard/features/weather/presentation/widgets/weather_for
 import 'package:weather_wizard/features/weather/presentation/widgets/weather_now_detail.dart';
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_bloc.dart';
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_state.dart';
-import 'package:weather_wizard/features/wizard/presentation/wizard_prison.dart';
+import 'package:weather_wizard/features/wizard/presentation/views/wizard_layout.dart';
 
 class WeatherDashboard extends StatelessWidget {
   const WeatherDashboard({super.key});
@@ -57,9 +57,14 @@ class WeatherDashboard extends StatelessWidget {
         ]
             // const SizedBox(height: 80),
             ),
-        const WizardPrison(),
-        const SizedBox(height: 20),
-        const GeolocationSearch(),
+        const Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              WizardLayout(),
+              SizedBox(height: 20),
+              GeolocationSearch()
+            ]),
         const WeatherForecast(),
       ],
     ));

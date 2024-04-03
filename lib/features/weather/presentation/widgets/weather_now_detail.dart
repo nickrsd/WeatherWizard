@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_wizard/core/common/place.dart';
 import 'package:weather_wizard/features/preferences/presentation/bloc/preferences_bloc.dart';
 import 'package:weather_wizard/features/weather/data/models/weather_condition.dart';
-import 'package:weather_wizard/features/weather/domain/entities/weather.dart';
 import 'package:weather_wizard/features/weather/domain/entities/weather_now.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_bloc.dart';
 import 'package:weather_wizard/features/weather/presentation/bloc/weather_event.dart';
