@@ -24,22 +24,3 @@ void main() {
     });
   });
 }
-
-    // contains all valid fields - will get parsed
-    // '{"time":"2024-03-26T04:30","interval":900,"temperature_2m":54.3,"relative_humidity_2m":45,"apparent_temperature":46.5,"is_day":1,"weather_code":1, "precipitation_probability":33':
-    // WeatherNow(condition: WeatherCondition.clearSky, temperature: 54.3, relativeHumidity: 45, isDaytime: true, precipitationChance: 33, time: "2024-03-26T04:30")
-    // '{"id": 0, "first_name": "Chahat", "last_name": "Gupta"}':
-    //     User(id: 0, firstName: 'Chahat', lastName: 'Gupta'),
-
-
-    // invalid JSON string - will not be parsed
-    // '{"id": 0, "first_name": "Chahat", "last_name": Gupta}':
-    //     throwsA(isA<FormatException>())
-//   };
-
-//   inputs.forEach((String input, dynamic expected) {
-//     test(input,() => expect(
-// expected is WeatherNow
-//                 ? WeatherNow.fromJson(jsonDecode(input))
-//                 : () => WeatherNow.fromJson(jsonDecode(input)),
-//             expected));
