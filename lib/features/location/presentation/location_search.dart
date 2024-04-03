@@ -18,38 +18,41 @@ class _GeolocationSearchState extends State<GeolocationSearch> {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(
-          minWidth: 300,
-          maxWidth: double.infinity,
-          minHeight: 60,
-          maxHeight: 160),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: TextField(
-                controller: _textController,
-                decoration: const InputDecoration(
-                  labelText: "Request evil wizard's divination",
-                  hintText: "Seattle, coldest place, a",
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+            minWidth: 300,
+            maxWidth: double.infinity,
+            minHeight: 60,
+            maxHeight: 160),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: TextField(
+                  controller: _textController,
+                  decoration: const InputDecoration(
+                    labelText: "Request evil wizard's divination",
+                    hintText: "Seattle, coldest place, a world wonder",
+                  ),
                 ),
               ),
             ),
-          ),
-          IconButton(
-              key: const Key('auto_fix_high_outlined'),
-              icon: const Icon(Icons.auto_fix_high_outlined,
-                  semanticLabel: 'Submit'),
-              iconSize: 32,
-              onPressed: () {
-                context
-                    .read<WizardBloc>()
-                    .add(WizardEnvisionedLocation(place: _text));
-              }),
-        ],
+            IconButton(
+                key: const Key('auto_fix_high_outlined'),
+                icon: const Icon(Icons.auto_fix_high_outlined,
+                    semanticLabel: 'Submit'),
+                iconSize: 32,
+                onPressed: () {
+                  context
+                      .read<WizardBloc>()
+                      .add(WizardEnvisionedLocation(place: _text));
+                }),
+          ],
+        ),
       ),
     );
   }
