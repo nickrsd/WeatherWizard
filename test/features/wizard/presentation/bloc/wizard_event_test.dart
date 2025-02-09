@@ -4,8 +4,6 @@ import 'package:weather_wizard/features/weather/domain/entities/weather.dart';
 import 'package:weather_wizard/features/weather/domain/entities/weather_condition.dart';
 import 'package:weather_wizard/features/wizard/presentation/bloc/wizard_event.dart';
 
-import '../../../../mocks.dart';
-
 void main() {
   const mockUserSearch = "Mt Doom of Middle Earth";
 
@@ -40,7 +38,7 @@ void main() {
 
     group('WizardEvent Equality', () {
       const String testPlace = 'Emerald City';
-      final WeatherEntity testWeather = weatherEntity;
+      //final WeatherEntity testWeather = weatherEntity;
 
       test('WizardEnvisionedLocation instances with same place are equal', () {
         expect(

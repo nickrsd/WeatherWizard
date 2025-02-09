@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:weather_wizard/core/widgets/flamewisp_shader.dart';
 import 'package:weather_wizard/features/wizard/presentation/widgets/wizard_animated.dart';
 
 class WizardPrison extends StatelessWidget {

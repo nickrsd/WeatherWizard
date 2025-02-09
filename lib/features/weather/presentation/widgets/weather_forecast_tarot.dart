@@ -17,7 +17,7 @@ class WeatherForecast extends StatelessWidget {
           if (state
               case WeatherUpdated(
                 dailyForecast: final days,
-                hourlyForecast: final hours
+                //hourlyForecast: final hours
               )) {
             return ListView.builder(
               scrollDirection: Axis.horizontal,

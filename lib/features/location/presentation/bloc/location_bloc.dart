@@ -17,13 +17,13 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   void onRequestedLocation(
       RequestedLocation event, Emitter<LocationState> emit) async {
     final location = await _locationRepository.determinePosition();
-    emit(LocationUpdated(
-        message: "location updated",
-        placeDescription: "N/A",
-        location: Geolocation(
-          latitude: location.latitude,
-          longitude: location.longitude,
-        )));
+    // emit(LocationUpdated(
+    //     message: "location updated",
+    //     placeDescription: "N/A",
+    //     location: Geolocation(
+    //       latitude: location.latitude,
+    //       longitude: location.longitude,
+    //     )));
   }
 
   void onSearchedLocation(

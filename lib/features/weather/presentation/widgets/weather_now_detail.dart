@@ -52,8 +52,7 @@ class WeatherNow extends StatelessWidget {
 }
 
 class _WeatherNowLabelsTwo extends StatelessWidget {
-  const _WeatherNowLabelsTwo(
-      {required this.weather, required this.place, super.key});
+  const _WeatherNowLabelsTwo({required this.weather, required this.place});
 
   final WeatherNowEntity weather;
   final PlaceDescriptor place;
@@ -198,9 +197,10 @@ class _WeatherNowLabelsTwo extends StatelessWidget {
   }
 }
 
+/*
 class _WeatherNowLabels extends StatelessWidget {
   const _WeatherNowLabels(
-      {required this.weather, required this.place, super.key});
+      {required this.weather, required this.place});
 
   final WeatherNowEntity weather;
   final PlaceDescriptor place;
@@ -220,7 +220,7 @@ class _WeatherNowLabels extends StatelessWidget {
               ),
             )
           : const SizedBox.shrink(),
-      Container(
+      SizedBox(
         // constraints: const BoxConstraints(minHeight: 150, maxHeight: 320),
         height: 400,
         width: 300,
@@ -266,7 +266,7 @@ class _WeatherNowLabels extends StatelessWidget {
   }
 }
 
-
+*/
                         // Text(
                         //     style: const TextStyle(fontSize: 16),
                         //     "humidity: ${weather.relativeHumidity}"),
